@@ -199,7 +199,8 @@ int main(int argc, char **argv)
   SSL_set_bio(ssl, net, net);
 
   // Connect SSL
-  if(SSL_connect(ssl) != 1) { 
+  int ssl_connect = SSL_connect(ssl);
+  if(ssl_connect != 1) {
 	  printf(FMT_CONNECT_ERR);
 	  ERR_print_errors_fp(stderr);
 	  SSL_shutdown(ssl);
@@ -207,7 +208,7 @@ int main(int argc, char **argv)
 	  close(sock);
 	  return 0;
  }
-
+ 
   //Determine if Server Certificate is valid
   success_code = SSL_get_verify_result(ssl);
   if(success_code != 0) {
@@ -236,7 +237,7 @@ int main(int argc, char **argv)
 	  close(sock);
 	  return 0;
   }
-
+  
   len = SSL_read(ssl, &buf, 255);
   if (len <= 0) {
 	  printf(FMT_INCORRECT_CLOSE);
