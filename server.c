@@ -187,8 +187,9 @@ int main(int argc, char **argv)
 
 	  // SSL Accept logic
 	  int code = SSL_accept(ssl);
+	  
 	  if (code == 0) {
-		  printf(FMT_ACCEPT_ERR);
+		  printf(FMT_INCOMPLETE_CLOSE);
 		  ERR_print_errors_fp(stderr);
 		  SSL_shutdown(ssl);
 		  SSL_free(ssl);
@@ -230,7 +231,7 @@ int main(int argc, char **argv)
 		  close(s);
 		  exit(0);
 	  }	
-
+	  
 	  SSL_shutdown(ssl);
 	  SSL_free(ssl);
       close(s);
