@@ -1,0 +1,16 @@
+[ ca ]
+default_ca	= CA_default
+
+[ CA_default]
+dir		= .
+certs		= $dir/certsdb
+new_certs_dir 	= $certs
+database	= $dir/index.txt
+certificate	= $dir/568ca.pem
+private_key	= $dir/cakey.pem
+serial		= $dir/serial
+RANDFILE	= $dir/private/.rand
+
+crldir		= $dir/crl
+crlnumber	= $dir/crlnumber
+crl		= $crldir/crl.pem
